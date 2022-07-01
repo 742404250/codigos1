@@ -1,33 +1,48 @@
-alert("BIENVENIDO A LA TELEFONICA  FORTEC")
+///------------------hora------------------------///
+const time = document.getElementById(`time`);
+const date = document.getElementById(`date`);
 
-let empresa=prompt("INGRESE A LA EMPRESA DESEA LLAMAR: ");
-let minutos=parseFloat(prompt("INGRESE LOS  MINUTOS QUE DESEA HABLAR: "));
-alert("fijo:0.20$ claro:0.40$ movistar:0.60$ entel:1$")
-let costo=parseFloat(prompt("INGRESE COSTO DE MINUTO DE EMPRESA QUE DESEA HABLAR: "));
-let fijo=0.20;
-let claro=0.40;
-let movistar=0.60;
-let entel=1;
-let total=costo*minutos;
+const monthNames = ["Janury", "February", "March", "april", "may", "June", "July", "August", "September", "Octuber", "November", "December"];
 
-if(fijo=minutos*0.20){
-    document.write(`LA EMPRESA QUE SE COMUNICO ES: ${empresa} <br>
-    COSTO POR MINUTO: ${costo} <br>
-    LOS MINUTOS SOLICITADO: ${minutos} <br>
-    TOTAL A PAGAR ES: ${total}`);
-}else if(claro=minutos*0.40){
-    document.write(`LA EMPRESA QUE SE COMUNICO ES: ${empresa} <br>
-    COSTO POR MINUTO: ${costo} <br>
-    LOS MINUTOS SOLICITADO: ${minutos} <br>
-    TOTAL A PAGAR ES: ${total}`);
-}else if(movistar=minutos*0.60){
-    document.write(`LA EMPRESA QUE SE COMUNICO ES: ${empresa} <br>
-    COSTO POR MINUTO: ${costo} <br>
-    LOS MINUTOS SOLICITADO: ${minutos} <br>
-    TOTAL A PAGAR ES: ${total}`);
-}else if(entel=minutos*1){
-    document.write(`LA EMPRESA QUE SE COMUNICO ES: ${empresa} <br>
-    COSTO POR MINUTO: ${costo} <br>
-    LOS MINUTOS SOLICITADO: ${minutos} <br>
-    TOTAL A PAGAR ES: ${total}`);
+const interval = setInterval(() =>{
+  const local = new Date();
+
+  let day = local.getDate(),
+  month = local.getMonth(),
+  year = local.getFullYear();
+
+  time.innerHTML = local.toLocaleTimeString();
+  date.innerHTML = `${day} ${monthNames[month]} ${year}`;
+
+}, 1000);
+
+/////-----------------cronometro-----------------------/////
+var i = 0;
+var Iniciar;
+function Crono() {
+    i++;
+    var Cen = i;
+
+    var iCen = Cen % 100;
+    var iSeg = Math.round((Cen - 50) / 100);
+    var iMin = Math.round((iSeg - 30) / 60);
+    iSeg = iSeg % 60;
+
+    var sCen = "" + ((iCen > 9) ? iCen : "0" + iCen);
+    var sSeg = "" + ((iSeg > 9) ? iSeg : "0" + iSeg);
+    var sMin = "" + ((iMin > 9) ? iMin : "0" + iMin);
+
+    contador.innerHTML = (sMin + ":" + sSeg + ":" + sCen);
+}
+function IniciarCrono() {
+    PausarCrono();
+    contador.innerHTML = ("00:00:00");
+}
+function EncenderCrono() {
+    if (i !== 0) { return; }
+    Iniciar = setInterval(Crono, 10);
+}
+function PausarCrono() {
+    clearInterval(Iniciar);
+    i = 0;
 }
